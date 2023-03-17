@@ -1,12 +1,16 @@
+import 'package:cliente_alea/Values/My_Colors.dart';
 import 'package:cliente_alea/Values/Strings.dart';
 import 'package:cliente_alea/Widgets/BackgroundStyle.dart';
 import 'package:flutter/material.dart';
+
+import 'UserHome.dart';
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Firebase Auth Demo',
+      theme: ThemeData(primaryColor: My_Colors.yellow_alea_dark),
       home: LoginAlea(),
     );
   }
@@ -73,6 +77,7 @@ class Datos extends StatefulWidget {
 }
 
 class _DatosState extends State<Datos> {
+  bool obs = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -83,18 +88,59 @@ class _DatosState extends State<Datos> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset("images/alealogo.jpg"),
-          Text("nombre"),
+          Text(Strings.user),
           SizedBox(),
-          TextFormField(),
+          TextFormField(
+            keyboardType: TextInputType.text,
+            decoration: InputDecoration(border: OutlineInputBorder()),
+          ),
           SizedBox(),
-          Text("pwd"),
+          Text(Strings.pwd),
           SizedBox(),
-          TextFormField(),
-          //Remember(),
+          TextFormField(
+            obscureText: obs,
+            decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: My_Colors.yellow_alea_dark)),
+                border: OutlineInputBorder(),
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.remove_red_eye_outlined),
+                  onPressed: () {
+                    setState(() {
+                      obs == true ? obs = true : obs = false;
+                    });
+                  },
+                )),
+          ),
+          Remember(),
           SizedBox(),
           Botons()
         ],
       ),
+    );
+  }
+}
+
+class Remember extends StatefulWidget {
+  @override
+  _RememberState createState() => _RememberState();
+}
+
+class _RememberState extends State<Remember> {
+  bool remember = false;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Checkbox(
+            value: remember,
+            onChanged: (remember) {
+              setState(() {
+                remember == false ? remember = true : remember = false;
+              });
+            }),
+        Text(Strings.remember)
+      ],
     );
   }
 }
@@ -106,7 +152,12 @@ class Botons extends StatelessWidget {
       width: double.infinity,
       height: 50,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => UserHome()),
+          );
+        },
         child: Text(
           Strings.login,
           style: TextStyle(
@@ -114,8 +165,8 @@ class Botons extends StatelessWidget {
           ),
         ),
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(
-                Color.fromARGB(255, 81, 86, 92))),
+            backgroundColor:
+                MaterialStateProperty.all<Color>(My_Colors.grey_dark)),
       ),
     );
   }
