@@ -1,5 +1,5 @@
 import 'package:cliente_alea/Values/My_Colors.dart';
-import 'package:cliente_alea/Values/Strings.dart';
+import 'package:cliente_alea/Values/My_Strings.dart';
 import 'package:cliente_alea/Widgets/BackgroundStyle.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +46,7 @@ class _LoginLabelState extends State<LoginLabel> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            Strings.login,
+            My_Strings.login,
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
           ),
@@ -54,7 +54,7 @@ class _LoginLabelState extends State<LoginLabel> {
             height: 5,
           ),
           Text(
-            Strings.welcome,
+            My_Strings.welcome,
             style: TextStyle(
               color: Colors.white,
               fontSize: 10,
@@ -87,15 +87,18 @@ class _DatosState extends State<Datos> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset("images/alealogo.jpg"),
-          Text(Strings.user),
+          Image.asset(
+            "images/alealogo.jpg",
+            scale: 1.9,
+          ),
+          Text(My_Strings.user),
           SizedBox(),
           TextFormField(
             keyboardType: TextInputType.text,
             decoration: InputDecoration(border: OutlineInputBorder()),
           ),
           SizedBox(),
-          Text(Strings.pwd),
+          Text(My_Strings.pwd),
           SizedBox(),
           TextFormField(
             obscureText: obs,
@@ -139,7 +142,7 @@ class _RememberState extends State<Remember> {
                 remember == false ? remember = true : remember = false;
               });
             }),
-        Text(Strings.remember)
+        Text(My_Strings.remember)
       ],
     );
   }
@@ -159,7 +162,7 @@ class Botons extends StatelessWidget {
           );
         },
         child: Text(
-          Strings.login,
+          My_Strings.login,
           style: TextStyle(
             color: Colors.white,
           ),
