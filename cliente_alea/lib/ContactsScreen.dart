@@ -5,7 +5,12 @@ import 'package:flutter/material.dart';
 import 'LateralMenu.dart';
 
 class ContactsScreen extends StatelessWidget {
-  // This widget is the root of your application.
+  // backing data
+  final emps = [
+    Emp("Tania", "info@aleaasesores.com", "Info", 666666),
+    Emp("Lidia", "lidia@aleaasesores.com", "Laboral", 620653964)
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,24 +20,18 @@ class ContactsScreen extends StatelessWidget {
       ),
       drawer: LateralMenu(),
       body: Center(
-        child: _myListView(context),
+        child: ListView.builder(
+          itemCount: emps.length,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                ContactList(emp: emps[index]),
+                Divider(),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
-}
-
-Widget _myListView(BuildContext context) {
-  // backing data
-  final emps = [
-    Emp("Tania", "info@aleaasesores.com", "Info", 666666),
-    Emp("Lidia", "lidia@aleaasesores.com", "Laboral", 620653964)
-  ];
-  return ListView.builder(
-    itemCount: emps.length,
-    itemBuilder: (context, index) {
-      return Column(
-        children: [ContactList().getContact(emps[index]), Divider()],
-      );
-    },
-  );
 }

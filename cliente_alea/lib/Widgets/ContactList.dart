@@ -1,46 +1,48 @@
+import 'package:cliente_alea/Values/My_Strings.dart';
 import 'package:cliente_alea/class/Emp.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+class ContactList extends StatelessWidget {
+  final Emp emp;
 
-class ContactList {
-  Widget getContact(Emp emp) {
+  ContactList({required this.emp});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-        child: Row(
-      children: [
-        Expanded(child: Text("")),
-        Expanded(
+      child: Row(
+        children: [
+          Expanded(child: Text("")),
+          Expanded(
             flex: 2,
-            child: Column(children: [
-              Text(emp.name),
-              Text(
-                "Departamento de  ${emp.dept}",
-              )
-            ])),
-        Expanded(child: Icon(Icons.alternate_email)),
-        Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(emp.name),
+                Text(My_Strings.dept + emp.dept),
+              ],
+            ),
+          ),
+          Expanded(
             child: IconButton(
-          icon: Icon(Icons.phone),
-          onPressed: () => _launchURL("www.google.com"),
-        ))
-      ],
-    ));
+              icon: Icon(Icons.alternate_email),
+              onPressed: () =>
+                  _launchURL('mailto:${emp.email}?subject=Asunto&body=Mensaje'),
+            ),
+          ),
+          Expanded(
+            child: IconButton(
+              icon: Icon(Icons.phone),
+              onPressed: () => _launchURL("tel:${emp.phone}"),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   _launchURL(url) async {
-    await launch("www.google.com");
-  }
-
-  void callEmp(int phone) {}
-  Future<void> sendEmail(String email) async {
-    String subject = 'This is a test email';
-    String body = 'This is a test email body';
-
-    String emailUrl = "mailto:$email?subject=$subject&body=$body";
-
-    if (await canLaunch(emailUrl)) {
-      await launch(emailUrl);
-    } else {
-      throw "Error occured sending an email";
-    }
+    await launch(url);
   }
 }
