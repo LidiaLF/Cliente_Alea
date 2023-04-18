@@ -77,6 +77,8 @@ class Datos extends StatefulWidget {
 }
 
 class _DatosState extends State<Datos> {
+  final TextEditingController _userController = TextEditingController();
+  IconData icon = Icons.remove_red_eye_outlined;
   bool obs = true;
   @override
   Widget build(BuildContext context) {
@@ -95,7 +97,16 @@ class _DatosState extends State<Datos> {
           SizedBox(),
           TextFormField(
             keyboardType: TextInputType.text,
-            decoration: InputDecoration(border: OutlineInputBorder()),
+            initialValue: _userController.text,
+            decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: My_Colors.yellow_alea_dark)),
+                border: OutlineInputBorder()),
+            onChanged: (value) {
+              setState(() {
+                _userController.text = value;
+              });
+            },
           ),
           SizedBox(),
           Text(My_Strings.pwd),
@@ -107,10 +118,18 @@ class _DatosState extends State<Datos> {
                     borderSide: BorderSide(color: My_Colors.yellow_alea_dark)),
                 border: OutlineInputBorder(),
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.remove_red_eye_outlined),
+                  icon: Icon(
+                    icon,
+                    color: My_Colors.yellow_alea_light,
+                  ),
                   onPressed: () {
                     setState(() {
-                      obs == true ? obs = true : obs = false;
+                      obs = !obs;
+                      if (obs == true) {
+                        icon = Icons.remove_red_eye_outlined;
+                      } else {
+                        icon = Icons.remove_red_eye;
+                      }
                     });
                   },
                 )),
@@ -131,17 +150,19 @@ class Remember extends StatefulWidget {
 
 class _RememberState extends State<Remember> {
   bool remember = false;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Checkbox(
-            value: remember,
-            onChanged: (remember) {
-              setState(() {
-                remember == false ? remember = true : remember = false;
-              });
-            }),
+          value: remember,
+          onChanged: (value) {
+            setState(() {
+              remember = value!;
+            });
+          },
+        ),
         Text(My_Strings.remember)
       ],
     );
@@ -158,7 +179,7 @@ class Botons extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => UserHome()),
+            MaterialPageRoute(builder: (_) => UserHome()),
           );
         },
         child: Text(

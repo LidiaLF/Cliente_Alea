@@ -35,7 +35,9 @@ class _UserSettingsState extends State<UserSettings> {
               SettingsTile(
                 title: Text(My_Strings.safety),
                 leading: Icon(Icons.lock),
-                onPressed: (BuildContext context) {},
+                onPressed: (BuildContext context) {
+
+                },
               ),
             /*  SettingsTile.switchTile(
                 title: Text(My_Strings.fingerprint),

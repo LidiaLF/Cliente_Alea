@@ -1,9 +1,7 @@
 import 'dart:math';
 
 import 'package:calendar_agenda/calendar_agenda.dart';
-import 'package:cliente_alea/LateralMenu.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
 
 class CalendarWidget extends StatefulWidget {
   @override
@@ -16,22 +14,17 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   CalendarAgendaController _calendarAgendaControllerAppBar =
       CalendarAgendaController();
 
-  late DateTime _selectedDateAppBBar;
-  late DateTime _selectedDateNotAppBBar;
 
-  Random random = new Random();
+  Random random = Random();
 
   @override
   void initState() {
     super.initState();
-    _selectedDateAppBBar = DateTime.now();
-    _selectedDateNotAppBBar = DateTime.now();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CalendarAgenda(
+    return CalendarAgenda(
         controller: _calendarAgendaControllerAppBar,
         appbar: false,
         selectedDayPosition: SelectedDayPosition.left,
@@ -57,7 +50,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                 .subtract(Duration(days: index * random.nextInt(5)))),
         onDateSelected: (date) {
           setState(() {
-            _selectedDateAppBBar = date;
           });
         },
        /* calendarLogo: Image.network(
@@ -68,8 +60,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
           'https://www.kindpng.com/picc/m/355-3557482_flutter-logo-png-transparent-png.png',
           scale: 15.0,
         ),*/
-      ),
-      body: Center(child: Text("non hai eventos")),
-    );
+      );
   }
 }
