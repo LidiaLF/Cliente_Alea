@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:calendar_agenda/calendar_agenda.dart';
 import 'package:flutter/material.dart';
+
 class CalendarWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -9,7 +10,8 @@ class CalendarWidget extends StatefulWidget {
 }
 
 class _CalendarWidgetState extends State<CalendarWidget> {
-  CalendarAgendaController _calendarAgendaControllerAppBar = CalendarAgendaController();
+  CalendarAgendaController _calendarAgendaControllerAppBar =
+      CalendarAgendaController();
   Random random = Random();
 
   @override
@@ -21,7 +23,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   Widget build(BuildContext context) {
     return CalendarAgenda(
       controller: _calendarAgendaControllerAppBar,
-      appbar: true,
+      appbar: false,
+      backgroundColor: Theme.of(context).primaryColor,
       selectedDayPosition: SelectedDayPosition.left,
       leading: IconButton(
         icon: Icon(
@@ -43,12 +46,11 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       lastDate: DateTime.now().add(Duration(days: 60)),
       events: List.generate(
           100,
-              (index) => DateTime.now()
+          (index) => DateTime.now()
               .subtract(Duration(days: index * random.nextInt(5)))),
       onDateSelected: (date) {
         setState(() {});
       },
-
     );
   }
 }

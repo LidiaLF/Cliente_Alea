@@ -1,4 +1,5 @@
 import 'package:cliente_alea/Values/My_Colors.dart';
+import 'package:cliente_alea/Values/My_Strings.dart';
 import 'package:cliente_alea/Widgets/ContactList.dart';
 import 'package:cliente_alea/class/Emp.dart';
 import 'package:flutter/material.dart';
@@ -15,22 +16,20 @@ class ContactsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(My_Strings.contactar),
         automaticallyImplyLeading: true,
         backgroundColor: My_Colors.yellow_alea_dark,
       ),
       drawer: LateralMenu(),
-      body: Center(
-        child: ListView.builder(
-          itemCount: emps.length,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                ContactList(emp: emps[index]),
-                Divider(),
-              ],
-            );
-          },
-        ),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return ListView.builder(
+            itemCount: emps.length,
+            itemBuilder: (context, index) {
+              return ContactList(emp: emps[index]);
+            },
+          );
+        },
       ),
     );
   }

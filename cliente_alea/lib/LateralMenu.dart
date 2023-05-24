@@ -38,7 +38,7 @@ class LateralMenu extends StatelessWidget {
     MenuOption(
       icon: Icons.settings,
       title: My_Strings.config,
-      screen: UserSettings(title: 'Settings'),
+      screen: UserSettings(),
     ),
   ];
 
